@@ -10,6 +10,11 @@ const Cadastro = () => {
 
     const schema = yup.object().shape({
 
+        nome: yup.string().min(2).required(),
+        email: yup.string().email().required,
+        telefone: yup.string().min(11),
+        senha: yup.min(8).required(),
+        confirmacaoSenha: yup.min(8).required(),
     });
 
 
@@ -61,15 +66,15 @@ const Cadastro = () => {
                         </div>
                         <div className="field">
                             <label>Telefone</label>
-                            <input type="text" name="" id="telefone" placeholder="(48) 9999-9999" {...register("telefone")} />
+                            <input type="text" name="telefone" id="telefone" placeholder="(48) 9999-9999" {...register("telefone")} />
                         </div>
                         <div className="field">
                             <label>Senha</label>
-                            <input type="password" name="" id="password" placeholder="Sua senha" {...register("senha")} />
+                            <input type="password" name="senha" id="password" placeholder="Sua senha" {...register("senha")} />
                         </div>
                         <div className="field">
                             <label>Confirmação de senha</label>
-                            <input type="password" name="" id="password-confirm" placeholder="Sua confirmação de senha" {...register("confirmacao-senha")} />
+                            <input type="password" name="confirmacaoSenha" id="password-confirm" placeholder="Sua confirmação de senha" {...register("confirmacao-senha")} />
                         </div>
                     </div>
 

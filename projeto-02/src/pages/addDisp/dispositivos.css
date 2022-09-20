@@ -1,0 +1,20 @@
+.adc-disp{
+    padding-top: 2vh;
+    
+}
+
+.adc-disp label{
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.buscar{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.buscar input{
+    width: 300px;
+}

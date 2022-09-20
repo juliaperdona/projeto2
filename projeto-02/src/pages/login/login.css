@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap');
+
+*{
+    font-family: 'Inter', sans-serif;
+    
+}
+
+#login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100vh;
+    padding: 0 2rem;
+}
+
+#login .form{
+    background-color: #f1f1f1;
+    width: 100%;
+    max-width: 480px;
+    padding: 0.5rem;
+}
+
+#login .field {
+    padding-bottom: 0.5rem;
+    
+}
+
+#login .field label{
+    display: block;
+}
+
+#login .field input {
+    margin: 0.4rem 0;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px #CA6F1E;
+    width: 100%;
+    max-width: 440px;
+}
+
+#login .action {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+button{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    gap: 16px;
+    
+
+    width: 111px;
+    height: 38px;
+    background: #FF8818;
+    border-radius: 40px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    cursor: pointer;
+}
+a{
+    width: 64px;
+    height: 18px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-decoration-line: underline;
+
+    color: #2E4052;
+
+    flex: none;
+    order: 3;
+    flex-grow: 0;
+}

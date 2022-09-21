@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "../../componentes/navbar";
 import { Card } from "../../componentes/cards/card";
 import styles from './home.css'
@@ -8,6 +9,12 @@ import styles from './home.css'
 
 const HomePage = () => {
     return (
+
+
+
+
+
+        
         <>
             <Navbar />
             <div className="clima">
@@ -29,9 +36,9 @@ const HomePage = () => {
             </div>
 
             <div className="todos-produtos">
-            <Card/>
-            <Card/>
-            <Card/>
+                <Card />
+                <Card />
+                <Card />
 
             </div>
 

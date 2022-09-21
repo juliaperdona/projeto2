@@ -51,3 +51,6 @@
     border-radius: 10px;
 }
 
+.botoes a {
+    cursor: pointer;
+}

@@ -1,9 +1,19 @@
-import React from "react";
+import React, {useContext} from "react";
 import styles from './perfil.css'
 import Logo from '../perfil/img/icon.svg'
 import { Navbar } from "../../componentes/navbar";
+import { AuthContext } from "../../contexts/auth";
 
 const Perfil = () => {
+        const {sair} = useContext(AuthContext);
+
+        const logout = () => {
+            sair()
+        }
+
+
+
+
     return (
         <>
             <Navbar />
@@ -30,7 +40,7 @@ const Perfil = () => {
 
                     <div className="botoes">
                         <button>Editar</button>
-                        <a href="">Sair</a>
+                        <a onClick={logout}>Sair</a>
                     </div>
 
                 </div>

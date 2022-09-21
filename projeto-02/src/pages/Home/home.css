@@ -19,6 +19,6 @@
     padding-top: 15px;
 }
 
-.filter:active{
+.filter button:active{
     background-color: blueviolet;
 }

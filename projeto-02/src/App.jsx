@@ -12,8 +12,8 @@ function App() {
     <div className="App">
 
       <div>
-      {/* <Rotas/> */}
-      <Cadastro/>
+      <Rotas/>
+      
       </div>
       
     </div>

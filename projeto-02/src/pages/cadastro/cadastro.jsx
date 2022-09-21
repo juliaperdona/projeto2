@@ -1,26 +1,31 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers"
-import * as yup from "yup"
+import { yupResolver} from "@hookform/resolvers/yup"
+import * as yup from 'yup';
 import Styles from './cadastro.css'
-import { Navbar } from "../../componentes/navbar";
-
 
 const Cadastro = () => {
 
     const schema = yup.object().shape({
 
-        nome: yup.string().min(2).required(),
-        email: yup.string().email().required,
+        name: yup.string().min(15).required("Campo Obrigatório"),
+        email: yup.string().email().required("Campo Obrigatório"),
+        foto: yup.string().url(),
         telefone: yup.string().min(11),
-        senha: yup.min(8).required(),
-        confirmacaoSenha: yup.min(8).required(),
+        senha: yup.string().min(8).required("Campo Obrigatório"),
+        confirmacaoSenha: yup.string().oneOf([yup.ref("senha"), null], "As senhas devem ser iguais").min(8).required("Campo Obrigatório"),
+        cep: yup.string().min(8,"Minímo 8 números").max(10).required("Campo Obrigatório"),
+        logradouro: yup.string().required("Campo Obrigatório"),
+        bairro: yup.string().required("Campo Obrigatório"),
+        localidade: yup.string().required("Campo Obrigatório"),
+        estado: yup.string().required("Campo Obrigatório"),
+        numeroCasa: yup.string().required("Campo Obrigatório"),
+        complemento: yup.string(),
     });
 
-
-
-
-    const { register, handleSubmit, setValue, setFocus } = useForm();
+    const { register, handleSubmit, setValue, setFocus, formState:{errors} } = useForm({
+        resolver: yupResolver(schema),
+    });
 
     const onSubmit = (e) => {
         console.log(e);
@@ -54,27 +59,34 @@ const Cadastro = () => {
                         <h3>Informações Pessoais</h3>
                         <div className="field">
                             <label>Nome Completo</label>
-                            <input type="text" placeholder="Seu nome" name="nome"{...register("nome")} />
+                            <input type="text" placeholder="Seu nome" name="nome" {...register("nome")} />
+                            <small>{errors.nome?.message}</small>
+                            
                         </div>
                         <div className="field">
                             <label>Email</label>
                             <input type="email" placeholder="Seu e-mail" name="email"{...register("e-mail")} />
+                            
                         </div>
                         <div className="field">
                             <label>URL foto perfil</label>
-                            <input type="url" placeholder="Sua foto" />
+                            <input type="url" placeholder="Sua foto" name="foto"{...register("foto")}/>
+                            
                         </div>
                         <div className="field">
                             <label>Telefone</label>
                             <input type="text" name="telefone" id="telefone" placeholder="(48) 9999-9999" {...register("telefone")} />
+                          
                         </div>
                         <div className="field">
                             <label>Senha</label>
                             <input type="password" name="senha" id="password" placeholder="Sua senha" {...register("senha")} />
+                            
                         </div>
                         <div className="field">
                             <label>Confirmação de senha</label>
                             <input type="password" name="confirmacaoSenha" id="password-confirm" placeholder="Sua confirmação de senha" {...register("confirmacao-senha")} />
+                            
                         </div>
                     </div>
 
@@ -83,33 +95,33 @@ const Cadastro = () => {
                         <h3>Endereço</h3>
                         <div className="field">
                             <label>CEP</label>
-                            <input type="text" name="" id="cep" placeholder="00000-000" maxLength="9" 
+                            <input type="text" name="cep" id="cep" placeholder="00000-000" maxLength="9" 
                             {...register("cep")} onBlur={consultaApi} />
                         </div>
                         <div className="field">
                             <label>Logradouro/Endereço</label>
-                            <input type="text" name="" id="logradouro" placeholder="Seu logradouro/endereço" {...register("logradouro")} />
+                            <input type="text" name="logradouro" id="logradouro" placeholder="Seu logradouro/endereço" {...register("logradouro")} />
                         </div>
                         <div className="field">
                             <label>Bairro</label>
-                            <input type="text" name="" id="bairro" placeholder="Seu Bairro"  {...register("bairro")} />
+                            <input type="text" name="bairro" id="bairro" placeholder="Seu Bairro"  {...register("bairro")} />
                         </div>
 
                         <div className="field">
                             <label>Cidade</label>
-                            <input type="text" name="" id="localidade" placeholder="Sua cidade"  {...register("localidade")} />
+                            <input type="text" name="localidade" id="localidade" placeholder="Sua cidade"  {...register("localidade")} />
                         </div>
                         <div className="field">
                             <label>Estado</label>
-                            <input type="text" name="" id="uf" placeholder="Seu estado" {...register("uf")} />
+                            <input type="text" name="estado" id="uf" placeholder="Seu estado" {...register("uf")} />
                         </div>
                         <div className="field">
                             <label>Número</label>
-                            <input type="number" name="" id="numero-casa" placeholder="Seu Número" {...register("numero-casa")} />
+                            <input type="number" name="numeroCasa" id="numero-casa" placeholder="Seu Número" {...register("numero-casa")} />
                         </div>
                         <div className="field">
                             <label>Complemento</label>
-                            <input type="text" name="" id="complemento" placeholder="Seu complemento" />
+                            <input type="text" name="complemento" id="complemento" placeholder="Seu complemento" />
 
                         </div>
 

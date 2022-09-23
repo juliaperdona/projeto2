@@ -1,6 +1,6 @@
 import React, { useState, useEffect ,createContext } from "react";
 
-import {api, createUsuario} from "../servicos/api";
+import {api, loginUsuario} from "../servicos/api";
 
 import { set } from "react-hook-form";
 
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
 
 
-        const resposta = await createUsuario(email, password)
+        const resposta = await loginUsuario(email, password)
 
         console.log('login', resposta.data)
 
@@ -41,11 +41,10 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", token)
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
-
-        // if (password === "secret00" ) {  //mudar senha dps 
+        
             setUser(usuarioLogado)
             navigate("/")
-       // }
+    
 
 
     };

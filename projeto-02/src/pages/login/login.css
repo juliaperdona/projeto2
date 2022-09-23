@@ -19,6 +19,8 @@
     width: 100%;
     max-width: 480px;
     padding: 0.5rem;
+    border-radius: 10px;
+    
 }
 
 #login .field {
@@ -31,13 +33,14 @@
 }
 
 #login .field input {
-    margin: 0.4rem 0;
+    
     padding: 0.6rem;
     border: none;
     border-radius: 10px;
     box-shadow: 1px 1px 6px #CA6F1E;
     width: 100%;
     max-width: 440px;
+    margin: 0.4em auto;
 }
 
 #login .action {
@@ -45,37 +48,11 @@
     margin-top: 0.5rem;
 }
 button{
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 24px;
-    gap: 16px;
     
-
     width: 111px;
     height: 38px;
     background: #FF8818;
     border-radius: 40px;
-    flex: none;
-    order: 2;
-    flex-grow: 0;
     cursor: pointer;
-}
-a{
-    width: 64px;
-    height: 18px;
-
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-    text-decoration-line: underline;
-
-    color: #2E4052;
-
-    flex: none;
-    order: 3;
-    flex-grow: 0;
+    border: none;
 }

@@ -1,45 +1,88 @@
 import React from "react";
+import axios from "axios";
 import { useForm } from "react-hook-form";
-import { yupResolver} from "@hookform/resolvers/yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { Link } from "react-router-dom";
 import * as yup from 'yup';
 import Styles from './cadastro.css'
+import { api } from "../../servicos/api";
 
 const Cadastro = () => {
 
     const schema = yup.object().shape({
 
-        name: yup.string().min(15).required("Campo Obrigatório"),
-        email: yup.string().email().required("Campo Obrigatório"),
-        foto: yup.string().url(),
-        telefone: yup.string().min(11),
-        senha: yup.string().min(8).required("Campo Obrigatório"),
-        confirmacaoSenha: yup.string().oneOf([yup.ref("senha"), null], "As senhas devem ser iguais").min(8).required("Campo Obrigatório"),
-        cep: yup.string().min(8,"Minímo 8 números").max(10).required("Campo Obrigatório"),
-        logradouro: yup.string().required("Campo Obrigatório"),
-        bairro: yup.string().required("Campo Obrigatório"),
-        localidade: yup.string().required("Campo Obrigatório"),
-        estado: yup.string().required("Campo Obrigatório"),
-        numeroCasa: yup.string().required("Campo Obrigatório"),
-        complemento: yup.string(),
+        fullName: yup.string().min(2, "Nome inválido").required("Campo Obrigatório"),
+        email: yup.string().email("O email inválido").required("Campo Obrigatório"),
+        photoUrl: yup.string().url("Foto de perfil deve ser uma URL válida"),
+        phone: yup.string(),
+        password: yup.string().min(8, "A senha de ter pelo menos 8 caracteres").required("Campo Obrigatório"),
+        //.matches(/^(?=.[A-Za-z])(?=.\d)(?=.[@$!%#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        //"A senha precisa conter uma letra maiúscula, uma miscula, um caractere especial e um número"),
+        confirmacaoSenha: yup.string().min(8, "A senha de ter pelo menos 8 caracteres")
+        .oneOf([yup.ref("password"), null], "As senhas devem ser iguais").required(),
+        zipCode: yup.string().min(8, "Minímo 8 números").max(10).required("Campo Obrigatório"),
+        street: yup.string().required("Campo Obrigatório"),
+        neighborhood: yup.string().required("Campo Obrigatório"),
+        city: yup.string().required("Campo Obrigatório"),
+        state: yup.string().required("Campo Obrigatório"),
+        number: yup.string().required("Campo Obrigatório"),
+        complement: yup.string(),
     });
 
-    const { register, handleSubmit, setValue, setFocus, formState:{errors} } = useForm({
+    const { register, handleSubmit, setValue, setFocus, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (e) => {
-        console.log(e);
+    const createUsuario = (value) => {
+
+
+        const {
+            email,
+            password,
+            fullName,
+            photoUrl,
+            phone,
+            zipCode,
+            street,
+            number,
+            neighborhood,
+            city,
+            state,
+            complement,
+        } = value
+
+        api.post("/auth/register", {
+            email,
+            password,
+            fullName,
+            photoUrl,
+            phone,
+            userAddress: {
+                zipCode,
+                street,
+                number,
+                neighborhood,
+                city,
+                state,
+                complement,
+            }
+        }).then((response) => {
+            // alert(response.data.msg);
+            console.log(response)
+        }).catch((response) => {
+            console.log("Erro" + response)
+        })
     }
 
     const consultaApi = (e) => {
         const cep = e.target.value.replace(/\D/g, '');
         console.log(cep);
         fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
-            setValue('logradouro', data.logradouro);
-            setValue('bairro', data.bairro);
-            setValue('localidade', data.localidade);
-            setValue('uf', data.uf);
-            setFocus('numero-casa')
+            setValue('street', data.logradouro);
+            setValue('neighborhood', data.bairro);
+            setValue('city', data.localidade);
+            setValue('state', data.uf);
+            setFocus('number')
 
         });
     }
@@ -51,7 +94,7 @@ const Cadastro = () => {
                 <h1>Cadastrar</h1>
 
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(createUsuario)}>
                 <div className="form-cadastro">
 
                     <div className="info-pessoais">
@@ -59,35 +102,44 @@ const Cadastro = () => {
                         <h3>Informações Pessoais</h3>
                         <div className="field">
                             <label>Nome Completo</label>
-                            <input type="text" placeholder="Seu nome" name="nome" {...register("nome")} />
-                            <small>{errors.nome?.message}</small>
-                            
+                            <input type="text" placeholder="Seu nome" {...register("fullName")} />
+                            <small>{errors.fullName?.message}</small>
+
                         </div>
                         <div className="field">
                             <label>Email</label>
-                            <input type="email" placeholder="Seu e-mail" name="email"{...register("e-mail")} />
-                            
+                            <input type="email" placeholder="Seu e-mail"{...register("email")} />
+                            <small>{errors.email?.message}</small>
+
                         </div>
-                        <div className="field">
-                            <label>URL foto perfil</label>
-                            <input type="url" placeholder="Sua foto" name="foto"{...register("foto")}/>
-                            
-                        </div>
-                        <div className="field">
-                            <label>Telefone</label>
-                            <input type="text" name="telefone" id="telefone" placeholder="(48) 9999-9999" {...register("telefone")} />
-                          
-                        </div>
+
+
                         <div className="field">
                             <label>Senha</label>
-                            <input type="password" name="senha" id="password" placeholder="Sua senha" {...register("senha")} />
-                            
+                            <input type="password" placeholder="Sua senha" {...register("password")} />
+                            <small>{errors.password?.message}</small>
+
                         </div>
                         <div className="field">
                             <label>Confirmação de senha</label>
-                            <input type="password" name="confirmacaoSenha" id="password-confirm" placeholder="Sua confirmação de senha" {...register("confirmacao-senha")} />
-                            
+                            <input type="password" placeholder="Sua confirmação de senha" {...register("confirmacaoSenha")} />
+                            <small>{errors.confirmacaoSenha?.message}</small>
+
                         </div>
+                        <div className="field">
+                            <label>URL foto perfil</label>
+                            <input type="url" placeholder="Sua foto" {...register("photoUrl")} />
+
+                        </div>
+
+                        <div className="field">
+                            <label>Telefone</label>
+                            <input type="text" placeholder="(99) 9999-9999" {...register("phone")} />
+                            <small>{errors.phone?.message}</small>
+
+                        </div>
+
+
                     </div>
 
 
@@ -95,33 +147,44 @@ const Cadastro = () => {
                         <h3>Endereço</h3>
                         <div className="field">
                             <label>CEP</label>
-                            <input type="text" name="cep" id="cep" placeholder="00000-000" maxLength="9" 
-                            {...register("cep")} onBlur={consultaApi} />
+                            <input type="text" placeholder="00000-000" maxLength="9"
+                                {...register("zipCode")} onBlur={consultaApi} />
+                            <small>{errors.zipCode?.message}</small>
                         </div>
+
                         <div className="field">
                             <label>Logradouro/Endereço</label>
-                            <input type="text" name="logradouro" id="logradouro" placeholder="Seu logradouro/endereço" {...register("logradouro")} />
+                            <input type="text"
+                                placeholder="Seu logradouro/endereço" {...register("street")} />
+                            <small>{errors.street?.message}</small>
                         </div>
                         <div className="field">
                             <label>Bairro</label>
-                            <input type="text" name="bairro" id="bairro" placeholder="Seu Bairro"  {...register("bairro")} />
+                            <input type="text"
+                                placeholder="Seu bairro"  {...register("neighborhood")} />
+                            <small>{errors.neighborhood?.message}</small>
                         </div>
 
                         <div className="field">
                             <label>Cidade</label>
-                            <input type="text" name="localidade" id="localidade" placeholder="Sua cidade"  {...register("localidade")} />
+                            <input type="text"
+                                placeholder="Sua cidade"  {...register("city")} />
+                            <small>{errors.city?.message}</small>
                         </div>
                         <div className="field">
                             <label>Estado</label>
-                            <input type="text" name="estado" id="uf" placeholder="Seu estado" {...register("uf")} />
+                            <input type="text" placeholder="Seu estado" {...register("state")} />
+                            <small>{errors.state?.message}</small>
                         </div>
                         <div className="field">
                             <label>Número</label>
-                            <input type="number" name="numeroCasa" id="numero-casa" placeholder="Seu Número" {...register("numero-casa")} />
+                            <input type="string"
+                                placeholder="Seu Número" {...register("number")} />
+                            <small>{errors.number?.message}</small>
                         </div>
                         <div className="field">
                             <label>Complemento</label>
-                            <input type="text" name="complemento" id="complemento" placeholder="Seu complemento" />
+                            <input type="text" placeholder="Seu complemento"  {...register("complement")} />
 
                         </div>
 

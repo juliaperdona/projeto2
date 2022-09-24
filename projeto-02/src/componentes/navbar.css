@@ -49,8 +49,9 @@
     order: 1;
     flex-grow: 0;
    cursor: pointer;
+   
 }
 
-button:hoover{
-    background-color: darkgray;
-}
+/* .button button:hover{
+    background-color: #225b59;
+} */

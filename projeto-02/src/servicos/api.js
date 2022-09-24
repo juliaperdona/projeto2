@@ -11,15 +11,24 @@ export const loginUsuario = async (email, password) => {
 
 export const buscarUsuario = async () => {
 
-const buscaUser = localStorage.getItem("user")
-const buscarId = JSON.parse(buscaUser) 
-const id = buscarId._id
-const token = localStorage.getItem("token")
+    const buscaUser = localStorage.getItem("user")
+    const buscarId = JSON.parse(buscaUser)
+    const id = buscarId._id
+    const token = localStorage.getItem("token")
 
-api.defaults.headers.Authorization = `Bearer ${token}`
+    api.defaults.headers.Authorization = `Bearer ${token}`
 
-// console.log(token)
-// console.log(id)
+    // console.log(token)
+    // console.log(id)
 
-return api.get(`/users/${id}`)
+    return api.get(`/users/${id}`)
+}
+
+export const renderDispositivo = async () => {
+  
+    const token = localStorage.getItem("token")
+
+    api.defaults.headers.Authorization = `Bearer ${token}`
+
+    return api.get(`/devices`)
 }

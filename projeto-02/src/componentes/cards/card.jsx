@@ -7,7 +7,7 @@ export const Card = () => {
     return (
         <>
 
-            {/* <div className="todos-produtos"> */}
+            
 
                 <div className="produto">
                     <div className="foto">
@@ -29,7 +29,7 @@ export const Card = () => {
                     </div>
 
                 </div>
-            {/* </div> */}
+           
 
         </>
     )

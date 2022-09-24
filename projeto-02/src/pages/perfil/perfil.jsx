@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
 import styles from './perfil.css'
-import Logo from '../perfil/img/icon.svg'
 import { Navbar } from "../../componentes/navbar";
 import { AuthContext } from "../../contexts/auth";
 import { buscarUsuario } from "../../servicos/api";
@@ -14,6 +13,7 @@ const Perfil = () => {
 
         const [user, setUser] = useState([])
         const [loading, setLoading] = useState(true)
+       
 
 
         useEffect(() =>{
@@ -49,9 +49,9 @@ const Perfil = () => {
                         <br />
                         <h4>Endereço</h4>
                         <br />
-                        {/* <p>{user.userAddress.zipCode}</p>
-                        <p>{user.userAddress.street},{user.userAddress.number}</p>
-                        <p>{user.userAddress.neighborhood} - {user.userAddress.state}</p> */}
+                        {/* <p>{endereco.zipCode}</p>
+                        <p>{endereco.street},{endereco.number}</p>
+                        <p>{endereco.neighborhood} - {endereco.state}</p> */}
 
                         
                     </div>

@@ -1,20 +1,37 @@
-.adc-disp{
-    padding-top: 2vh;
+.App {
+    text-align: center;
+    background-color: rgb(178, 213, 213);
+    width: 100vw;
+    height:100vh;
     
+  }
+
+
+.adc-disp {
+    padding-top: 2vh;
+
 }
 
-.adc-disp label{
+.adc-disp label {
     padding-left: 20px;
     font-size: 14px;
 }
 
-.buscar{
+
+
+.buscar {
     display: flex;
     gap: 20px;
     align-items: center;
     padding-left: 20px;
 }
 
-.buscar input{
+.buscar input {
     width: 300px;
+    margin-top: 15px;
 }
+
+
+
+
+  

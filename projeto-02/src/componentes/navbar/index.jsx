@@ -1,8 +1,8 @@
 import React from "react";
 import styles from './navbar.css'
-import Icon from './img/icon.svg'
+import Icon from '../img/icon.svg'
 
-import { Route, BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
     return (

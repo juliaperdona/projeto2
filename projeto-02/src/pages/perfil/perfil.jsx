@@ -49,9 +49,9 @@ const Perfil = () => {
                         <br />
                         <h4>Endereço</h4>
                         <br />
-                        {/* <p>{endereco.zipCode}</p>
-                        <p>{endereco.street},{endereco.number}</p>
-                        <p>{endereco.neighborhood} - {endereco.state}</p> */}
+                     {/* <p>{user.userAddress.zipCode}</p>
+                        <p>{user.userAddress.street},{user.userAddress.number}</p>
+                        <p>{user.userAddress.neighborhood} - {user.userAddress.state}</p> */}
 
                         
                     </div>

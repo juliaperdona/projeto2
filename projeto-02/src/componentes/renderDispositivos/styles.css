@@ -3,6 +3,11 @@ body{
 }
 
 
+.renderDisp{
+    display: flex;
+    flex-direction: column;
+}
+
 .dispositivo {
     display: flex;
     flex-direction: column;
@@ -58,3 +63,21 @@ li{
     gap: 20px;
     
 }
+
+.local select {
+    margin: 0.4rem 0;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px #CA6F1E;
+    width: 200px;
+   
+}
+form {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    
+}
+

@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from '../img/icon.svg'
 import styles from './card.css'
+import { dispUser } from "../../servicos/api";
 
 
 export const Card = () => {
+
+    const [dispCadastrado, setDispCadastrado] = useState([])
+    
+
+    useEffect(() => {
+        (async () => {
+            const resposta = await dispUser()
+            setDispCadastrado(resposta.data)
+        })();
+    }, [])
+
+    console.log(dispCadastrado)
+
+
     return (
         <>
 

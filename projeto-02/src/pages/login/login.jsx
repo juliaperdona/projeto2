@@ -41,7 +41,6 @@ const LoginPage = () => {
             <h1 className="title">Login</h1>
             <form className="form" onSubmit={handleSubmit(entrar)}>
                 <div className="field">
-                    {/* <p>{String(autenticado)}</p> */}
                     <label>Email</label>
                     <input type="email" name="email" id="email" 
                     placeholder="Insira seu e-mail"  {...register("email")} 
@@ -59,7 +58,8 @@ const LoginPage = () => {
                     <button type="submit">Entrar</button>
                 </div>
                 <div className="action">
-                    <Link to={Cadastro}>Cadastre-se</Link>
+                    <Link to='/cadastro'><a>Cadastre-se</a></Link>
+                  
                     
                 </div>
             </form>

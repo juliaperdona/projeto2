@@ -18,9 +18,6 @@ export const buscarUsuario = async () => {
 
     api.defaults.headers.Authorization = `Bearer ${token}`
 
-    // console.log(token)
-    // console.log(id)
-
     return api.get(`/users/${id}`)
 }
 
@@ -31,4 +28,24 @@ export const renderDispositivo = async () => {
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     return api.get(`/devices`)
+}
+
+export const adcDispUser = async () =>{
+    const token = localStorage.getItem("token")
+
+    api.defaults.headers.Authorization = `Bearer ${token}`
+
+    return api.post(`/userDevices`)
+
+    
+}
+
+export const dispUser = async () => {
+    const buscaUser = localStorage.getItem("user")
+    const token = localStorage.getItem("token")
+    const buscarId = JSON.parse(buscaUser)
+    const id = buscarId._id
+    api.defaults.headers.Authorization = `Bearer ${token}`
+
+    return api.get(`userDevices/user/${id}`)
 }

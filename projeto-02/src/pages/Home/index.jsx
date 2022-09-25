@@ -3,18 +3,45 @@ import { useEffect, useState } from "react";
 import { Navbar } from "../../componentes/navbar";
 import { Card } from "../../componentes/cards/card";
 import styles from './home.css'
+import axios from "axios";
 
 
 
 
 const HomePage = () => {
-    return (
 
 
+    // const [localizacao, setLocalizacao] = useState(false)
+    // const [weather, setWeather] = useState(false)
 
 
+    // useEffect(()=>{
+    //     navigator.geolocation.getCurrentPosition((position)=>{
+    //         getWeather(position.coords.latitude, position.coords.longitude)
+    //         setLocalizacao(true)
+    //     })
+    // }, [])
 
+
+  
+
+    // let getWeather = async (lat, long) => {
+    //     let  res = await axios.get("https://api.openweathermap.org/data/2.5/weather", {
+    //         params: {
+    //             lat: lat,
+    //             lon: long,
+    //             appid: process.env.REACT_APP_OPEN_WHEATHER_KEY,
+    //             lang:"pt",
+    //             units: 'metric',
+    //         }
+    //     });
+    //     setWeather(res.data)
+    //     console.log(res.data)
+    // }
         
+
+
+    return (
         <>
             <Navbar />
             <div className="clima">

@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import * as yup from 'yup';
 import Styles from './cadastro.css'
 import { api } from "../../servicos/api";
+import swal from 'sweetalert';
+
+
 
 const Cadastro = () => {
 
@@ -67,7 +70,9 @@ const Cadastro = () => {
                 complement,
             }
         }).then((response) => {
-            // alert(response.data.msg);
+            swal({
+                title: "Usuário Cadastrado",
+                icon: "success"});
             console.log(response)
         }).catch((response) => {
             console.log("Erro" + response)
@@ -195,7 +200,7 @@ const Cadastro = () => {
                 <div className="botoes">
                     <button type="submit">Cadastrar</button>
 
-                    <a href="">Login</a>
+                    <Link to='/login'><a>Login</a></Link>
                 </div>
             </form>
 
